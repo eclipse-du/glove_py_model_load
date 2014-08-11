@@ -26,8 +26,8 @@ class Glove():
             self.word_dic = {line.split()[0]:np.asarray(line.split()[1:], dtype='float') for line in f}
 
     def consine_distance(self, word1, word2):
-        return np.dot(self.word_dic[word1],self.word_dic[word2])/ \
-        (np.linalg.norm(self.word_dic[word1])* np.linalg.norm(self.word_dic[word2]))
+        return np.dot(self.word_dic[word1],self.word_dic[word2]) \
+            /(np.linalg.norm(self.word_dic[word1])* np.linalg.norm(self.word_dic[word2]))
 
     def MostSimilarWord(self, word,TopN = 30):
         #print self.word_dic['china']
