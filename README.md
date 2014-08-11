@@ -8,6 +8,6 @@ Using packages:
 3.sklearn
 
 Homepage:
-http://dzdblog.sinaapp.com/
+http://blog.csdn.net/adooadoo
 
 
