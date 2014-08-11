@@ -26,11 +26,13 @@ class Glove():
             self.word_dic = {line.split()[0]:np.asarray(line.split()[1:], dtype='float') for line in f}
 
     def consine_distance(self, word1, word2):
-        return np.dot(self.word_dic[word1],self.word_dic[word2])/(np.linalg.norm(self.word_dic[word1])*np.linalg.norm(self.word_dic[word2]))
+        return np.dot(self.word_dic[word1],self.word_dic[word2])/ \
+        (np.linalg.norm(self.word_dic[word1])* np.linalg.norm(self.word_dic[word2]))
 
     def MostSimilarWord(self, word,TopN = 30):
         #print self.word_dic['china']
-        return sorted({word2:self.consine_distance(word, word2) for word2 in self.word_dic.keys()}.items(), lambda x, y: cmp(x[1], y[1]), reverse= True) [1:TopN+1]
+        return sorted({word2:self.consine_distance(word, word2) for word2 in self.word_dic.keys()}.items(), \
+            lambda x, y: cmp(x[1], y[1]), reverse= True) [1:TopN+1]
 
     def clustering(self, cluster_size):
         X = np.array(list(self.word_dic.itervalues()))
@@ -39,8 +41,8 @@ class Glove():
 if __name__ == "__main__":
     starttime = datetime.datetime.now()
     model = Glove("vectors.txt") #load model
-    #print model.MostSimilarWord('china')
-    
+    print model.MostSimilarWord('china')
+
     cluster_size = 100 #set the cluster's size
     cluster_center, result, inertia = model.clustering(cluster_size)
     keys = model.word_dic.keys() # get all the words
@@ -58,4 +60,3 @@ if __name__ == "__main__":
     endtime = datetime.datetime.now()
     print 'Time:', (endtime - starttime).seconds,'s'
     
-
